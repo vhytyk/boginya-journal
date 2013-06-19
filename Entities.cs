@@ -19,6 +19,8 @@ namespace BoginyaJournal.Entities
 
     public class DbVersion
     {
+        [PrimaryKey, NonUpdatable]
+        public int ID { get; set; }
         public int CurrentValue { get; set; }
     }
     public class Tovar
@@ -83,6 +85,7 @@ namespace BoginyaJournal.Entities
         public decimal Amount { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
+        public bool IsRent { get; set; }
         public string Comment { get; set; }
         [MapIgnore]
         public int Kod
@@ -121,7 +124,7 @@ namespace BoginyaJournal.Entities
         public int ID_User { get; set; }
         public string Login { get; set; }
         [MapField("PASS")]
-        public string Password{ get; set; }
+        public string Pass{ get; set; }
         public Rights Rights { get; set; }
 
         public static User CurrentUser { get; set; }

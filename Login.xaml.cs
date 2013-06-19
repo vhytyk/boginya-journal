@@ -112,7 +112,7 @@ namespace BoginyaJournal
 
         private void LogIn(object param)
         {
-            if (null != Selected && Selected.Password == Password.Trim())
+            if (null != Selected && Selected.Pass == Password.Trim())
             {
                 Entities.User.CurrentUser = Selected;
                 if (!reLogin)

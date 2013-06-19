@@ -41,7 +41,7 @@ namespace BoginyaJournal
                 }
                 string connectionString = string.Format(@"DataSource={0};Database=d:\ProfStor\SKLAD.GDB;User=SYSDBA;Password=masterkey;Dialect=3;Charset=win1251", Utils.Config.AppSettings.Settings["Server"].Value);
                 if(!ApplicationDeployment.IsNetworkDeployed)
-                    connectionString = string.Format(@"DataBase=D:\Projects\Journal\BoginyaJournal_MAIN\BoginyaJournal\BoginyaJournal\bin\Debug\SKLAD.GDB;User=SYSDBA;Password=masterkey;Dialect=3;Charset=win1251");
+                    connectionString = string.Format(@"DataBase=c:\Users\user\Documents\Visual Studio 2010\Projects\BoginyaJournal\bin\Debug\SKLAD.GDB;User=SYSDBA;Password=masterkey;Dialect=3;Charset=win1251");
                 BLToolkit.Data.DbManager.AddConnectionString("Fdp", "Sklad", connectionString);
                 BLToolkit.Data.DbManager.AddDataProvider(new BLToolkit.Data.DataProvider.FdpDataProvider());
                 //checkin connection

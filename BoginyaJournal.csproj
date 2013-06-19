@@ -198,6 +198,8 @@
     <Resource Include="Journal.ico" />
     <Resource Include="favicon.ico" />
     <Resource Include="Images\ico_delete.png" />
+    <EmbeddedResource Include="DbMigration\Scripts\migrate\migrate_ver2.sql" />
+    <EmbeddedResource Include="DbMigration\Scripts\rollback\rollback_ver2.sql" />
     <Content Include="Images\Remove-349235435.svg" />
   </ItemGroup>
   <ItemGroup>

@@ -46,6 +46,10 @@ namespace BoginyaJournal.JournalViews
                 return Item.Tovar != null;
             }
         }
+        public bool CanEditIsRent
+        {
+            get { return Item.ID <= 0; }
+        }
     }
 
 }

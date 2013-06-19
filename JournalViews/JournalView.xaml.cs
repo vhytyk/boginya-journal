@@ -178,7 +178,8 @@ namespace BoginyaJournal
                                             Amount = j.Amount,
                                             Price = j.Price,
                                             Discount = j.Discount,
-                                            Comment = j.Comment
+                                            Comment = j.Comment,
+                                            IsRent = j.IsRent
                                         };
                         var list = query.ToList();
                         return list;
@@ -375,7 +376,7 @@ namespace BoginyaJournal
 
         public void RemoveJournalItem()
         {
-            if (null != selectedItem && 
+            if (CanRemoveItem && null != selectedItem && 
                 MessageBox.Show(string.Format("Ви впевнені що хочете вилучити позицію \"{0}\"?",selectedItem.Name), "вилучення", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 using (DbManager db = new DbManager())
@@ -383,7 +384,7 @@ namespace BoginyaJournal
                     db.BeginTransaction();
                     try
                     {
-                        if (selectedItem.Tovar != null)
+                        if (selectedItem.Tovar != null && !selectedItem.IsRent)
                         {
                             //add ostatok in tovar
                             selectedItem.Tovar.Ostatok += (int)selectedItem.Amount;
@@ -444,10 +445,13 @@ namespace BoginyaJournal
                                 SqlQuery<Journal> query = new SqlQuery<Journal>(db);
                                 query.Insert(newJournal);
 
-                                //reduce ostatok in tovar
-                                newJournal.Tovar.Ostatok -= (int)newJournal.Amount;
-                                SqlQuery<Tovar> query2 = new SqlQuery<Tovar>(db);
-                                query2.Update(newJournal.Tovar);
+                                if (!newJournal.IsRent) // if it's rent - reduce amount is not needed
+                                {
+                                    //reduce ostatok in tovar
+                                    newJournal.Tovar.Ostatok -= (int) newJournal.Amount;
+                                    SqlQuery<Tovar> query2 = new SqlQuery<Tovar>(db);
+                                    query2.Update(newJournal.Tovar);
+                                }
                                 db.CommitTransaction();
                             }
                             catch {
