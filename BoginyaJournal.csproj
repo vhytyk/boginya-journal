@@ -16,10 +16,14 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>ftp://vichytyk.ho.ua/htdocs/boginyajournal/</PublishUrl>
     <Install>true</Install>
@@ -79,14 +83,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BLToolkit.4">
-      <HintPath>..\3dParty\BLToolkit.4.dll</HintPath>
+      <HintPath>3dParty\BLToolkit.4.dll</HintPath>
     </Reference>
-    <Reference Include="BLToolkit.Data.DataProvider.Firebird.4">
-      <HintPath>..\3dParty\BLToolkit.Data.DataProvider.Firebird.4.dll</HintPath>
-    </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=2.5.2.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\3dParty\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    <Reference Include="FirebirdSql.Data.FirebirdClient">
+      <HintPath>3dParty\FirebirdSql.Data.FirebirdClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -111,6 +111,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Ean13.cs" />
+    <Compile Include="FdpDataProvider.cs" />
     <Compile Include="JournalViews\JournalItemView.xaml.cs">
       <DependentUpon>JournalItemView.xaml</DependentUpon>
     </Compile>
