@@ -1,0 +1,38 @@
+﻿<Window x:Class="BoginyaJournal.JournalViews.JournalItemView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Додати позицію в журнал" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">Код:</Label>
+        <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=Item.Kod}" />
+        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">Назва:</Label>
+        <Label Grid.Row="1" Grid.Column="1">
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Item.Name}" >
+            </TextBlock>
+        </Label>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">Ціна:</Label>
+        <TextBox Name="txtPrice" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Item.Price}" Margin="3"></TextBox>
+        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right">К-сть:</Label>
+        <TextBox Name="txtAmount" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Item.Amount}" Margin="3" IsEnabled="{Binding CanEditAmount}"></TextBox>
+        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right">Опис:</Label>
+        <TextBox Name="txtComment" Grid.Row="4" Grid.Column="1" Text="{Binding Path=Item.Comment}" Margin="3" TextWrapping="Wrap"></TextBox>
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button IsDefault="True" Margin="12" Width="100" Click="Button_Click">OK</Button>
+            <Button IsCancel="True" Margin="12" Width="100">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>
+
+    

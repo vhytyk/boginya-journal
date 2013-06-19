@@ -1,0 +1,80 @@
+﻿<Window x:Class="BoginyaJournal.JournalView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Title}" WindowState="Maximized" Height="513" Width="1042" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" Icon="/BoginyaJournal;component/Journal.ico">
+    <Window.Resources>
+        <SolidColorBrush x:Key="RedBackBrush" Color="#9EFF5050"/>
+        <Style x:Key="rowStyle1" TargetType="{x:Type DataGridRow}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ID_Tovar}" Value="0">
+                    <Setter Property="Background" Value="{StaticResource RedBackBrush}"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>    
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Path=AddJournalItemCommand}" Key="F5"></KeyBinding>
+        <KeyBinding Command="{Binding Path=RemoveJournalItemCommand}" Key="F6"></KeyBinding>
+        <KeyBinding Command="{Binding Path=RefreshAllCommand}" Key="R" Modifiers="Control"></KeyBinding>
+        <KeyBinding Command="{Binding Path=ChangeUserCommand}" Key="L" Modifiers="Control"></KeyBinding>
+        <KeyBinding Command="{Binding Path=ShowMonthSumCommand}" Key="M" Modifiers="Control"></KeyBinding>
+        <KeyBinding Command="{Binding Path=ShowMonthRevenueCommand}" Key="B" Modifiers="Control"></KeyBinding>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="70"  />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.RowSpan="3">
+            <DockPanel>
+                <Label DockPanel.Dock="Left" Name="lblUser" Content="{Binding Path=CurrentUser.Login}"></Label>
+                <Button DockPanel.Dock="Right" Command="{Binding Path=ChangeUserCommand}" Width="32" HorizontalAlignment="Right" Margin="5">
+                    <Image Source="/BoginyaJournal;component/Images/Lock_icon.png"></Image>
+                </Button>
+            </DockPanel>
+            <DatePicker Name="datePicker" Focusable="False" FontSize="25" SelectedDate="{Binding CurrentDate}" />
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="6 2 2 2" Name="buttonAdd" Command="{Binding Path=AddJournalItemCommand}" IsEnabled="{Binding CanAddItem}">
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Source="/BoginyaJournal;component/Images/Add.png" Height="40" Width="40" ></Image>
+                        <TextBlock VerticalAlignment="Center" Margin="10">(F5)</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Margin="6 2 2 2" Name="buttonRemove" Command="{Binding Path=RemoveJournalItemCommand}" IsEnabled="{Binding CanRemoveItem}">
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Source="/BoginyaJournal;component/Images/ico_delete.png" Height="36" Width="36" ></Image>
+                        <TextBlock VerticalAlignment="Center" Margin="5">(F6)</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <ComboBox Name="cmbReduce" Margin="0 10" ItemsSource="{Binding ReduceItems}" SelectedItem="{Binding SelectedReduce}"></ComboBox>
+            <Button Name="btnAddReduce" IsEnabled="{Binding CanAddReduce}" Command="{Binding Path=AddReduceCommand}" Margin="10 0">взяти з каси</Button>
+        </StackPanel>
+        <DataGrid Grid.Column="2" Grid.RowSpan="3" ItemsSource="{Binding JournalList}" SelectedItem="{Binding SelectedItem}" AutoGenerateColumns="False" FontSize="22" CanUserAddRows="False" IsReadOnly="True" RowStyle="{DynamicResource rowStyle1}">
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditItemCommand}" ></MouseBinding>
+            </DataGrid.InputBindings>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Код" Binding="{Binding Path=Kod}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Назва" Binding="{Binding Path=Name}" Width="350"></DataGridTextColumn>
+                <DataGridTextColumn Header="К-сть" Binding="{Binding Path=Amount}" Width="70"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ціна" Binding="{Binding Path=Price}" Width="120"></DataGridTextColumn>
+                <DataGridTextColumn Header="Продавець" Binding="{Binding Path=User.Login}" Width="150"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label>В касі на дату:</Label>
+            <Label Content="{Binding InKasaSumDay}" Margin="0 0 200 0" Foreground="Blue"></Label>
+            <Label>В касі:</Label>
+            <Label Content="{Binding InKasaSum}" Margin="0 0 20 0" Foreground="Green"></Label>
+            <Label>Сума за день:</Label>
+            <Label Content="{Binding DaySum}" Margin="0 0 20 0" Foreground="Green"></Label>
+        </StackPanel>
+    </Grid>
+</Window>
